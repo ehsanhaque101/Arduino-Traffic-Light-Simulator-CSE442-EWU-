@@ -1,0 +1,209 @@
+A51 MACRO ASSEMBLER  TRAFFIC                                                              05/12/2018 22:10:28 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02c
+OBJECT MODULE PLACED IN .\Objects\traffic.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE traffic.asm SET(SMALL) DEBUG PRINT(.\Listings\traffic.lst) OBJECT(.\Obj
+                      ects\traffic.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1             ORG 00H
+0000 020030            2             LJMP MAIN
+0300                   3             ORG 300H
+0300 C0F9A4B0          4     TBL:    DB 0C0H,0F9H,0A4H,0B0H,99H,92H,82H,0F8H,80H,90H    ;7seg data for comm. anode type
+0304 999282F8                
+0308 8090                    
+0030                   5             ORG 30H
+                       6             
+0030 75A000            7     MAIN:   MOV P2,#00H
+0033 75B000            8             MOV P3,#00H
+0036 312F              9             ACALL FRONT
+0038 900300           10             MOV DPTR,#TBL
+003B E4               11             CLR A
+003C 75400A           12             MOV 40H,#10
+003F 75430A           13             MOV 43H,#10
+0042 754614           14             MOV 46H,#20
+0045 754914           15             MOV 49H,#20
+0048 7823             16             MOV R0,#35
+004A 7E1E             17             MOV R6,#30
+004C 7F28             18             MOV R7,#40
+                      19            
+004E E540             20     X1:     MOV A,40H
+0050 75F00A           21             MOV B,#10
+0053 84               22             DIV AB
+0054 F541             23             MOV 41H,A
+0056 85F042           24             MOV 42H,B
+                      25             
+                      26            
+0059 D2B0             27     A1:     SETB P3.0
+005B C2B1             28             CLR P3.1
+005D E541             29             MOV A,41H
+005F 93               30             MOVC A,@A+DPTR
+0060 F5A0             31             MOV P2,A
+0062 3126             32             ACALL DELAY
+0064 75B000           33             MOV P3,#00H
+0067 D2B1             34             SETB P3.1
+0069 C2B0             35             CLR P3.0
+006B E542             36             MOV A,42H
+006D 93               37             MOVC A,@A+DPTR
+006E F5A0             38             MOV P2,A
+0070 3126             39            ACALL DELAY
+0072 75B000           40             MOV P3,#00H
+0075 8002             41             SJMP X3
+0077 80D5             42     X2:     SJMP X1
+0079 E543             43     X3:     MOV A,43H
+007B 75F00A           44             MOV B,#10
+007E 84               45             DIV AB
+007F F544             46             MOV 44H,A
+0081 85F045           47             MOV 45H,B
+0084 D2B2             48             SETB P3.2
+0086 C2B3             49             CLR P3.3
+0088 E544             50             MOV A,44H
+008A 93               51             MOVC A,@A+DPTR
+008B F5A0             52             MOV P2,A
+008D 3126             53             ACALL DELAY
+008F 75B000           54             MOV P3,#00H
+0092 D2B3             55             SETB P3.3
+A51 MACRO ASSEMBLER  TRAFFIC                                                              05/12/2018 22:10:28 PAGE     2
+
+0094 C2B2             56             CLR P3.2
+0096 E545             57             MOV A,45H
+0098 93               58             MOVC A,@A+DPTR
+0099 F5A0             59             MOV P2,A
+009B 3126             60             ACALL DELAY
+009D 75B000           61             MOV P3,#00H
+                      62     
+                      63     
+00A0 E546             64             MOV A,46H
+00A2 75F00A           65             MOV B,#10
+00A5 84               66             DIV AB
+00A6 F547             67             MOV 47H,A
+00A8 85F048           68             MOV 48H,B
+00AB D2B4             69             SETB P3.4
+00AD C2B5             70             CLR P3.5
+00AF E547             71             MOV A,47H
+00B1 93               72             MOVC A,@A+DPTR
+00B2 F5A0             73             MOV P2,A
+00B4 3126             74             ACALL DELAY
+00B6 75B000           75             MOV P3,#00H
+00B9 D2B5             76             SETB P3.5
+00BB C2B4             77             CLR P3.4
+00BD E548             78             MOV A,48H
+00BF 93               79             MOVC A,@A+DPTR
+00C0 F5A0             80             MOV P2,A
+00C2 3126             81             ACALL DELAY
+00C4 75B000           82             MOV P3,#00H
+                      83     
+                      84     
+00C7 E549             85             MOV A,49H
+00C9 75F00A           86             MOV B,#10
+00CC 84               87             DIV AB
+00CD F550             88             MOV 50H,A
+00CF 85F051           89             MOV 51H,B
+00D2 D2B6             90             SETB P3.6
+00D4 C2B7             91             CLR P3.7
+00D6 E550             92             MOV A,50H
+00D8 93               93             MOVC A,@A+DPTR
+00D9 F5A0             94             MOV P2,A
+00DB 3126             95             ACALL DELAY
+00DD 75B000           96             MOV P3,#00H
+00E0 D2B7             97             SETB P3.7
+00E2 C2B6             98             CLR P3.6
+00E4 E551             99             MOV A,51H
+00E6 93              100             MOVC A,@A+DPTR
+00E7 F5A0            101             MOV P2,A
+00E9 3126            102             ACALL DELAY
+00EB 75B000          103             MOV P3,#00H
+                     104     
+                     105     
+00EE D887            106             DJNZ R0,X2
+00F0 7823            107             MOV R0,#35
+                     108     
+00F2 D54003          109             DJNZ 40H,Q1
+00F5 754014          110             MOV 40H,#20
+                     111     
+00F8 D54305          112     Q1:     DJNZ 43H,Q2
+00FB 75430A          113             MOV 43H,#10
+00FE 3136            114             ACALL RIGHT          
+                     115     
+0100 D54606          116     Q2:     DJNZ 46H,Q3
+0103 754314          117             MOV 43H,#20
+0106 75460A          118             MOV 46H,#10
+                     119     
+0109 D54905          120     Q3:     DJNZ 49H,Q4
+010C 75490A          121             MOV 49H,#10
+A51 MACRO ASSEMBLER  TRAFFIC                                                              05/12/2018 22:10:28 PAGE     3
+
+010F 313D            122             ACALL BACK
+                     123     
+0111 DE0B            124     Q4:     DJNZ R6,X4
+0113 3144            125             ACALL LEFT
+0115 75400A          126             MOV 40H,#10
+0118 75430A          127             MOV 43H,#10
+011B 75461E          128             MOV 46H,#30
+                     129     
+011E DF03            130     X4:     DJNZ R7,L1
+0120 020030          131             LJMP MAIN
+0123 02004E          132     L1:     LJMP X1     
+                     133     
+0126 7C05            134     DELAY:  MOV R4,#5
+0128 7DFF            135     H2:     MOV R5,#0FFH
+012A DDFE            136     H1:     DJNZ R5,H1
+012C DCFA            137             DJNZ R4,H2
+012E 22              138             RET
+                     139     
+012F 759054          140     FRONT:  MOV P1,#54H
+0132 758002          141             MOV P0,#02H
+0135 22              142             RET
+                     143     
+0136 7590A1          144     RIGHT:  MOV P1,#0A1H
+0139 758002          145             MOV P0,#02H
+013C 22              146             RET
+                     147     
+013D 759009          148     BACK:  MOV P1,#09H
+0140 758005          149            MOV P0,#05H
+0143 22              150            RET
+                     151     
+0144 75904A          152     LEFT:  MOV P1,#4AH
+0147 758008          153            MOV P0,#08H
+014A 22              154            RET
+*** WARNING #A41 IN 154 (traffic.asm, LINE 154): MISSING 'END' STATEMENT
+A51 MACRO ASSEMBLER  TRAFFIC                                                              05/12/2018 22:10:28 PAGE     4
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+A1 . . . . . . . .  C ADDR   0059H   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+BACK . . . . . . .  C ADDR   013DH   A   
+DELAY. . . . . . .  C ADDR   0126H   A   
+FRONT. . . . . . .  C ADDR   012FH   A   
+H1 . . . . . . . .  C ADDR   012AH   A   
+H2 . . . . . . . .  C ADDR   0128H   A   
+L1 . . . . . . . .  C ADDR   0123H   A   
+LEFT . . . . . . .  C ADDR   0144H   A   
+MAIN . . . . . . .  C ADDR   0030H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+Q1 . . . . . . . .  C ADDR   00F8H   A   
+Q2 . . . . . . . .  C ADDR   0100H   A   
+Q3 . . . . . . . .  C ADDR   0109H   A   
+Q4 . . . . . . . .  C ADDR   0111H   A   
+RIGHT. . . . . . .  C ADDR   0136H   A   
+TBL. . . . . . . .  C ADDR   0300H   A   
+X1 . . . . . . . .  C ADDR   004EH   A   
+X2 . . . . . . . .  C ADDR   0077H   A   
+X3 . . . . . . . .  C ADDR   0079H   A   
+X4 . . . . . . . .  C ADDR   011EH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  1 WARNING(S), 0 ERROR(S)
